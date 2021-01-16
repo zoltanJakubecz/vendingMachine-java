@@ -10,7 +10,7 @@ public class ProductClassTest {
 
     @Test
     void sanityCheck() {
-        Product product = new Product();
+        Product product = new Product("Jaffa", 66);
         assertThat(product).isNotNull();
     }
 
