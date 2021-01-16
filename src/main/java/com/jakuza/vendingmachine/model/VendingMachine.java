@@ -38,4 +38,8 @@ public class VendingMachine {
     public void setProducts(Map<Product, Integer> products) {
         this.products = products;
     }
+
+    public void addProduct(String name, Integer price){
+        products.put(new Product(name, price), 1);
+    }
 }
