@@ -14,4 +14,28 @@ public class VendingMachine {
         coins = new HashMap<>();
         products = new HashMap<>();
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Map<Coins, Integer> getCoins() {
+        return coins;
+    }
+
+    public void setCoins(Map<Coins, Integer> coins) {
+        this.coins = coins;
+    }
+
+    public Map<Product, Integer> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Map<Product, Integer> products) {
+        this.products = products;
+    }
 }
