@@ -4,5 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VendingMachine {
-    Map<Coins, Integer> coins = new HashMap<>();
+
+    private String name;
+    private Map<Coins, Integer> coins;
+    private Map<Product, Integer> products;
+
+    public VendingMachine(String name) {
+        this.name = name;
+        coins = new HashMap<>();
+        products = new HashMap<>();
+    }
 }
