@@ -23,6 +23,6 @@ public class VendingMachineServiceTest {
 
     @Test
     void resetIncomeCounterWhenTheRequestCancelled() {
-        assertThat(vendingMachineService.cancelRequest()).isEqualTo(0);
+        assertThat(vendingMachineService.cancelRequest().size()).isEqualTo(0);
     }
 }

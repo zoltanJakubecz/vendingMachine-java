@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 public class VendingMachineService {
 
     private final VendingMachine vendingMachine;
-    private final List<Integer> incomeCounter;
+    private final List<Coins> incomeCounter;
 
     public VendingMachineService(VendingMachine vendingMachine) {
         this.vendingMachine = vendingMachine;
@@ -20,12 +20,13 @@ public class VendingMachineService {
     public Integer insertCoins(Integer income){
         Stream.of(Coins.values())
                 .filter(v -> v.getValue().equals(income))
-                .findFirst().ifPresent(coin -> incomeCounter.add(coin.getValue()));
-        return incomeCounter.stream().reduce(0, Integer::sum);
+                .findFirst().ifPresent(incomeCounter::add);
+        return incomeCounter.stream().map(Coins::getValue).reduce(0, Integer::sum);
     }
 
-    public Integer cancelRequest(){
+    public List<Coins> cancelRequest(){
         incomeCounter.clear();
-        return 0;
+        return incomeCounter;
     }
+
 }
