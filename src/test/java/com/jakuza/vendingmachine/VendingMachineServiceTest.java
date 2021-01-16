@@ -4,6 +4,7 @@ import com.jakuza.vendingmachine.model.VendingMachine;
 import com.jakuza.vendingmachine.service.VendingMachineService;
 import org.junit.jupiter.api.Test;
 
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VendingMachineServiceTest {
@@ -20,4 +21,8 @@ public class VendingMachineServiceTest {
         assertThat(vendingMachineService.insertCoins(10)).isEqualTo(10);
     }
 
+    @Test
+    void resetIncomeCounterWhenTheRequestCancelled() {
+        assertThat(vendingMachineService.cancelRequest()).isEqualTo(0);
+    }
 }
