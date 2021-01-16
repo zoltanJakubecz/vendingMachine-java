@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class VendingMachineClassTest {
     @Test
-    void sanitaryTest() {
+    void sanityTest() {
         VendingMachine vendingMachine = new VendingMachine();
         assertThat(vendingMachine).isNotNull();
     }
