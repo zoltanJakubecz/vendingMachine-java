@@ -19,7 +19,7 @@ public enum Coins {
         return name;
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 
