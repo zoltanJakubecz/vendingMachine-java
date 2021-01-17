@@ -3,7 +3,6 @@ package com.jakuza.vendingmachine;
 import com.jakuza.vendingmachine.model.ResponseProduct;
 import com.jakuza.vendingmachine.model.VendingMachine;
 import com.jakuza.vendingmachine.service.VendingMachineService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
@@ -18,9 +17,6 @@ public class VendingMachineServiceTest {
         vendingMachine.addProduct("Cola", 25);
     }
 
-    @BeforeAll
-    static void beforeAll() {
-    }
 
     @Test
     void sanityCheck() {
@@ -46,13 +42,13 @@ public class VendingMachineServiceTest {
     }
 
     @Test
-    void getNotAvailableWhenWrongGivenProduct() {
+    void getNotAvailableMessageWhenWrongGivenProduct() {
         ResponseProduct responseProduct = vendingMachineService.selectProduct("JaFFa");
         assertThat(responseProduct.getMessage()).isEqualTo("Not available");
     }
 
     @Test
-    void getInsertMoreCoinsWhenCreditIsNotEnough() {
+    void getInsertMoreCoinsMessageWhenCreditIsNotEnough() {
         ResponseProduct responseProduct = vendingMachineService.selectProduct("Cola");
         assertThat(responseProduct.getMessage()).isEqualTo("Please insert coins");
     }
