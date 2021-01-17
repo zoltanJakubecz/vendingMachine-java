@@ -38,8 +38,14 @@ public class VendingMachineServiceTest {
     }
 
     @Test
-    void getBackChooseProduct() {
+    void getChooseProduct() {
         ResponseProduct responseProduct = vendingMachineService.selectProduct("Cola");
         assertThat(responseProduct.getProduct().getName()).isEqualTo("Cola");
+    }
+
+    @Test
+    void getNothingWhenWrongGivenProduct() {
+        ResponseProduct responseProduct = vendingMachineService.selectProduct("JaFFa");
+        assertThat(responseProduct.getProduct()).isNull();
     }
 }

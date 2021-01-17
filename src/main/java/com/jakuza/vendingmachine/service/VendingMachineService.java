@@ -33,15 +33,16 @@ public class VendingMachineService {
     }
 
     public ResponseProduct selectProduct(String productRequest){
-        int change;
         Map<Product, Integer> products = vendingMachine.getProducts();
-        Product product = products.keySet()
-                .stream()
+        Product product = products.keySet().stream()
                 .filter(prod -> productRequest.equals(prod.getName()))
                 .findFirst()
                 .orElse(null);
-        assert product != null;
-        change = incomeCounter.stream().map(Coins::getValue).reduce(0, Integer::sum) - product.getPrice();
+        Integer credit = incomeCounter.stream().map(Coins::getValue).reduce(0, Integer::sum);
+        product = credit >=0 ? product : null;
+        Integer change = product != null ?
+                    credit - product.getPrice() :
+                    0;
         return new ResponseProduct(product, change);
     }
 
