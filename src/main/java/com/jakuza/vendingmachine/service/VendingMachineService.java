@@ -52,10 +52,9 @@ public class VendingMachineService {
 
         Map<Coins, Integer> coins = vendingMachine.getCoins();
 
-        for (Coins coin: incomeCounter){
-            coins.put(coin, coins.containsKey(coin) ? coins.get(coin) + 1 : 1);
-        }
+        incomeCounter.forEach(coin -> coins.put(coin, coins.containsKey(coin) ? coins.get(coin) + 1 : 1));
         vendingMachine.setCoins(coins);
+
         Integer change = credit - product.getPrice();
 
         return new ResponseProduct(product, change, "Enjoy you drink");
