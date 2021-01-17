@@ -4,10 +4,12 @@ public class ResponseProduct {
 
     private Product product;
     private Integer change;
+    private String message;
 
-    public ResponseProduct(Product product, Integer change) {
+    public ResponseProduct(Product product, Integer change, String message) {
         this.product = product;
         this.change = change;
+        this.message = message;
     }
 
     public Product getProduct() {
@@ -24,5 +26,13 @@ public class ResponseProduct {
 
     public void setChange(Integer change) {
         this.change = change;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
