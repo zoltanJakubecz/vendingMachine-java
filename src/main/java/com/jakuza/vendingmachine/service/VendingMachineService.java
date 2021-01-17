@@ -34,16 +34,31 @@ public class VendingMachineService {
 
     public ResponseProduct selectProduct(String productRequest){
         Map<Product, Integer> products = vendingMachine.getProducts();
-        Product product = products.keySet().stream()
-                .filter(prod -> productRequest.equals(prod.getName()))
+
+        Map.Entry<Product, Integer> productQuantityEntry = products.entrySet().stream()
+                .filter(productIntegerEntry -> productRequest.equals(productIntegerEntry.getKey().getName()))
                 .findFirst()
                 .orElse(null);
+
+        if(productQuantityEntry == null || productQuantityEntry.getValue() == 0)
+            return new ResponseProduct(null, 0, "Not available");
+
+        Product product = productQuantityEntry.getKey();
         Integer credit = incomeCounter.stream().map(Coins::getValue).reduce(0, Integer::sum);
-        product = credit >=0 ? product : null;
-        Integer change = product != null ?
-                    credit - product.getPrice() :
-                    0;
-        return new ResponseProduct(product, change);
+
+
+        if(credit < product.getPrice())
+            return new ResponseProduct(null, 0, "Please insert coins");
+
+        Map<Coins, Integer> coins = vendingMachine.getCoins();
+
+        for (Coins coin: incomeCounter){
+            coins.put(coin, coins.containsKey(coin) ? coins.get(coin) + 1 : 1);
+        }
+        vendingMachine.setCoins(coins);
+        Integer change = credit - product.getPrice();
+
+        return new ResponseProduct(product, change, "Enjoy you drink");
     }
 
 }

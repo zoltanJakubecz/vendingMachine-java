@@ -39,13 +39,21 @@ public class VendingMachineServiceTest {
 
     @Test
     void getChooseProduct() {
+        vendingMachineService.insertCoins(25);
+        vendingMachineService.insertCoins(25);
         ResponseProduct responseProduct = vendingMachineService.selectProduct("Cola");
         assertThat(responseProduct.getProduct().getName()).isEqualTo("Cola");
     }
 
     @Test
-    void getNothingWhenWrongGivenProduct() {
+    void getNotAvailableWhenWrongGivenProduct() {
         ResponseProduct responseProduct = vendingMachineService.selectProduct("JaFFa");
-        assertThat(responseProduct.getProduct()).isNull();
+        assertThat(responseProduct.getMessage()).isEqualTo("Not available");
+    }
+
+    @Test
+    void getInsertMoreCoinsWhenCreditIsNotEnough() {
+        ResponseProduct responseProduct = vendingMachineService.selectProduct("Cola");
+        assertThat(responseProduct.getMessage()).isEqualTo("Please insert coins");
     }
 }
