@@ -51,13 +51,22 @@ public class VendingMachineService {
             return new ResponseProduct(null, 0, "Please insert coins");
 
         Map<Coins, Integer> coins = vendingMachine.getCoins();
-
         incomeCounter.forEach(coin -> coins.put(coin, coins.containsKey(coin) ? coins.get(coin) + 1 : 1));
         vendingMachine.setCoins(coins);
 
         Integer change = credit - product.getPrice();
 
+        // TODO: remove the change from machine if there are the coins available or send warning message to user
+
         return new ResponseProduct(product, change, "Enjoy you drink");
+    }
+
+    public void resetVendingMachineByAddingProductsAndCoins(List<Product> productIncome, List<Coins> coinsIncome){
+
+        Map<Product, Integer> products = vendingMachine.getProducts();
+        productIncome.forEach(product -> products.put(product, products.containsKey(product) ? products.get(product) + 1 : 1));
+        vendingMachine.setProducts(products);
+
     }
 
 }
