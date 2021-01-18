@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VendingMachineServiceTest {
@@ -62,13 +61,18 @@ public class VendingMachineServiceTest {
 
     @Test
     void addProductAndCoinsToMachine() {
+
+        Product coke = new Product("Coke", 25);
+        Product pepsi = new Product("Pepsi", 35);
+        Product soda = new Product("Soda", 45);
+
         List<Product> productsToAdd = new ArrayList<>(
                 Arrays.asList(
-                        new Product("Coke", 25),
-                        new Product("Coke", 25),
-                        new Product("Pepsi", 35),
-                        new Product("Pepsi", 35),
-                        new Product("Soda", 45)
+                        coke,
+                        coke,
+                        pepsi,
+                        pepsi,
+                        soda
                 )
         );
 
@@ -84,6 +88,7 @@ public class VendingMachineServiceTest {
         );
 
         vendingMachineService.resetVendingMachineByAddingProductsAndCoins(productsToAdd, coinsToAdd);
-        assertThat(vendingMachine.getProducts()).hasSize(6);
+        assertThat(vendingMachine.getProducts()).hasSize(4);
+        assertThat(vendingMachine.getCoins()).hasSize(3);
     }
 }

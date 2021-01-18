@@ -67,6 +67,10 @@ public class VendingMachineService {
         productIncome.forEach(product -> products.put(product, products.containsKey(product) ? products.get(product) + 1 : 1));
         vendingMachine.setProducts(products);
 
+        Map<Coins, Integer> coins = vendingMachine.getCoins();
+        coinsIncome.forEach(coin -> coins.put(coin, coins.containsKey(coin) ? coins.get(coin) + 1 : 1));
+        vendingMachine.setCoins(coins);
+
     }
 
 }
